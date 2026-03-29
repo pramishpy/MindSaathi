@@ -224,11 +224,11 @@ export default function CoursesPage() {
                 <article key={course.id} className={`course-card ${statusClass}`}>
                   {isCompleted ? (
                     <div className="course-card-status-bar status-completed">
-                      ✓ Completed
+                      Completed
                     </div>
                   ) : isEnrolled ? (
                     <div className="course-card-status-bar status-inprogress">
-                      ↗ In progress
+                      In progress
                     </div>
                   ) : null}
                   <div className="course-chip-row">

@@ -38,28 +38,28 @@ const featureItems = [
     description:
       'Interactive lessons with videos, myth-vs-fact activities, and practical assignments that teens can complete in class.',
     tag: 'Engagement',
-    icon: '📚',
+    icon: 'SL',
   },
   {
     title: 'Early Support Signals',
     description:
       'Track progress and participation patterns so staff can identify low engagement early and act with supportive interventions.',
     tag: 'Prevention',
-    icon: '📊',
+    icon: 'ES',
   },
   {
     title: 'Teacher and Admin Insights',
     description:
       'Use cohort analytics by school and grade to plan anti-stigma campaigns and evaluate learning outcomes over time.',
     tag: 'Analytics',
-    icon: '🏫',
+    icon: 'TA',
   },
   {
     title: 'Safe Help-Seeking Pathways',
     description:
       'Resource hub and guided workflows help students move from awareness to trusted support channels quickly and safely.',
     tag: 'Support',
-    icon: '🤝',
+    icon: 'SH',
   },
 ]
 

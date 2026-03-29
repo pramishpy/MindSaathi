@@ -101,7 +101,7 @@ export default function DashboardPage() {
         </div>
         <div className="quick-action-grid">
           <article className="quick-action-card accent-teal">
-            <p className="quick-action-icon">📚</p>
+            <p className="quick-action-icon">LEARN</p>
             <h3>{nextCourse ? 'Continue learning' : 'Pick your first module'}</h3>
             <p>
               {nextCourse
@@ -114,7 +114,7 @@ export default function DashboardPage() {
           </article>
 
           <article className="quick-action-card accent-coral">
-            <p className="quick-action-icon">🎯</p>
+            <p className="quick-action-icon">PLAY</p>
             <h3>Play stigma challenge</h3>
             <p>Train your responses using short, classroom-safe mini games.</p>
             <Link className="btn secondary" to="/resources">
@@ -123,7 +123,7 @@ export default function DashboardPage() {
           </article>
 
           <article className="quick-action-card accent-green">
-            <p className="quick-action-icon">✅</p>
+            <p className="quick-action-icon">TASK</p>
             <h3>{nextAssignment ? 'Complete your next assignment' : 'All assignments submitted'}</h3>
             <p>
               {nextAssignment
@@ -136,7 +136,7 @@ export default function DashboardPage() {
           </article>
 
           <article className="quick-action-card accent-slate">
-            <p className="quick-action-icon">👤</p>
+            <p className="quick-action-icon">PROFILE</p>
             <h3>Tune your interests</h3>
             <p>Update your profile so recommendations match what you need now.</p>
             <Link className="btn ghost" to="/profile">

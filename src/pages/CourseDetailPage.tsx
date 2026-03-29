@@ -161,7 +161,7 @@ export default function CourseDetailPage() {
 
         {feedback ? (
           <p className={isCorrect ? 'success-text' : 'error-text'} style={{ marginTop: '0.5rem' }}>
-            {isCorrect ? '✓ ' : '✗ '}{feedback}
+            {isCorrect ? 'Correct: ' : 'Incorrect: '}{feedback}
           </p>
         ) : null}
       </section>
@@ -202,7 +202,7 @@ export default function CourseDetailPage() {
 
             {completed ? (
               <span className="chip done" style={{ fontSize: '0.95rem', padding: '0.4rem 0.9rem' }}>
-                ✓ Completed
+                Completed
               </span>
             ) : null}
           </div>
@@ -210,7 +210,7 @@ export default function CourseDetailPage() {
 
         {justCompleted ? (
           <div className="completion-banner" role="status">
-            🎉 Module completed! Your progress has been saved.
+            Module completed. Your progress has been saved.
           </div>
         ) : null}
       </section>
