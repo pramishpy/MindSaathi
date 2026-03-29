@@ -28,8 +28,8 @@ interface TicketFormState {
 const TICKETS_KEY = 'mindsaathi_support_tickets_v1'
 
 const issueTypes = [
-  'Request pricing info',
   'Platform demo request',
+  'Pricing and licensing',
   'Technical onboarding',
   'School pilot setup',
   'Other support need',
@@ -202,7 +202,7 @@ export default function LandingPage() {
                 Start your pilot
               </Link>
               <a className="btn ghost" href="#support">
-                Request pricing info
+                Request support ticket
               </a>
             </div>
 
