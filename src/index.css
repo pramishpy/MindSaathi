@@ -118,7 +118,7 @@ p {
 
 .landing-hero {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1fr;
   gap: 1rem;
   background: linear-gradient(130deg, #eefdf9 0%, #ffffff 55%, #fff3eb 100%);
 }

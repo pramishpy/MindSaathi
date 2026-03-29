@@ -62,6 +62,13 @@ const featureItems = [
   },
 ]
 
+const whyChooseItems = [
+  'Student-friendly content that is easy to complete in short school periods.',
+  'Localizable support pathways for safer help-seeking behavior.',
+  'Clear analytics for planning classroom and institution interventions.',
+  'Fast onboarding with ready-to-run modules and assignments.',
+]
+
 const initialFormState: TicketFormState = {
   fullName: '',
   email: '',
@@ -190,7 +197,7 @@ export default function LandingPage() {
         <section className="landing-hero panel">
           <div>
             <p className="eyebrow">Built for schools and youth programs</p>
-            <h1>One platform to reduce mental health stigma and strengthen early support</h1>
+            <h1>One platform to reduce mental health stigma</h1>
             <p>
               MindSaathi Schools helps institutions deliver engaging mental health
               literacy, track student learning, and respond faster with trusted
@@ -202,7 +209,7 @@ export default function LandingPage() {
                 Start your pilot
               </Link>
               <a className="btn ghost" href="#support">
-                Request support ticket
+                Request pricing and support
               </a>
             </div>
 
@@ -221,16 +228,6 @@ export default function LandingPage() {
               </article>
             </div>
           </div>
-
-          <aside className="landing-highlight">
-            <h2>Why teams choose MindSaathi</h2>
-            <ul className="bullet-list">
-              <li>Teen-friendly content that is easy to complete in short school periods.</li>
-              <li>Localizable support pathways for safer help-seeking behavior.</li>
-              <li>Clear analytics for planning classroom and institution interventions.</li>
-              <li>Fast onboarding with ready-to-run modules and assignments.</li>
-            </ul>
-          </aside>
         </section>
 
         <section className="panel" id="features">
@@ -245,6 +242,21 @@ export default function LandingPage() {
                 <span className="chip subtle">{item.tag}</span>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="panel" id="why-mindsaathi">
+          <div className="section-head">
+            <h2>Why teams choose MindSaathi</h2>
+            <p className="muted-text">Built for real school schedules and rollout constraints.</p>
+          </div>
+
+          <div className="landing-feature-grid">
+            {whyChooseItems.map((item) => (
+              <article key={item} className="landing-feature-card">
+                <p>{item}</p>
               </article>
             ))}
           </div>
