@@ -1,79 +1,138 @@
 # MindSaathi Schools
 
-MindSaathi Schools is a role-based mental health literacy platform built for schools. It reduces stigma through personalized learning modules, interactive myth-vs-fact activities, anti-stigma games, and school-level engagement analytics for educators.
+MindSaathi Schools is a role-based mental health literacy platform for schools and youth programs. It combines short learning modules, myth-vs-fact activities, assignments, support resources, and cohort analytics to help reduce stigma and strengthen early support behavior.
 
-This is an educational tool, not a clinical product. It is designed to normalize facts-based mental health conversations and support safe help-seeking behavior in school communities.
+This is an educational product, not a clinical diagnosis or treatment tool.
+
+## What's New (March 2026)
+
+- Public landing page includes a full support ticket form for pilot, onboarding, technical, and licensing requests.
+- In-app Support page now mirrors the stakeholder support flow with a feature overview and ticket intake.
+- Dashboard quick-action badges and support feature icons use text labels instead of emoji symbols.
+- Course status and quiz feedback use clear text labels (for example: "Correct", "Incorrect", "Completed", "In progress").
+- Student learning flow remains role-based, while teacher/admin analytics continue to provide cohort-level visibility.
 
 ## Problem Focus
 
-In many school contexts, students avoid mental health conversations because of stigma, misinformation, and fear of judgment. MindSaathi Schools helps institutions deliver structured, evidence-informed learning that reduces blame, builds empathy, and connects students to trusted support pathways.
+In many school contexts, students avoid mental health conversations due to stigma, misinformation, and fear of judgment. MindSaathi Schools helps institutions deliver structured, evidence-informed learning that builds empathy, improves literacy, and connects students to trusted support pathways.
 
-## Features
+## Feature Overview
 
-### Authentication and Accounts
+### Authentication and Role-Based Access
 
 - Signup with role selection: student, teacher, or admin
-- Login and logout with session persistence
-- Auto-enrollment in starter modules on signup based on selected interests
+- Login/logout with session persistence
+- Starter module enrollment is created automatically from selected interests
+- Protected routes across dashboard, courses, assignments, resources, support, profile, and analytics
+
+### Public Landing and Buyer Onboarding
+
+- School-focused product narrative and KPI cards
+- Platform feature cards for stakeholder review
+- Embedded support ticket form directly on the landing page
+- Ticket counter persisted per browser session using local storage
 
 ### Student Dashboard
 
-- Personalized module recommendations based on interests and progress
+- Personalized recommendations using interests and completion progress
 - Completion rate metric with progress bar
-- Quick-action cards for continuing learning, playing the stigma challenge, completing assignments, and updating interests
-- Color-coded stat cards: enrolled modules, completed, in-progress, interest tracks, pending assignments
-- Assignment progress panel with pending task visibility
-- Recommended next modules based on topic interests
+- Quick-action cards for learning, challenge play, assignment progress, and profile updates
+- Assignment progress panel with pending and submitted context
+- Recommended modules and school action prompts
 
-### Courses and Learning Modules
+### Courses Library
 
-- Course library with search, topic filter, status filter, and sort options
-- Six topic areas: anxiety, depression, bipolar disorder, schizophrenia, stigma busting, everyday wellbeing
-- Visual status indicators on cards: completed (green), in-progress (teal), not started (default)
-- Each module includes:
-  - Embedded YouTube video
-  - Myth vs fact cards with red/green visual treatment
-  - Single-question interactive quiz with feedback
-  - Dedicated module progress panel to enroll or mark complete
-  - Completion confirmation banner
-  - Student assignments with deliverables
-  - Hands-on classroom activities
-  - Trusted external resources
+- Search by title/topic keywords
+- Topic filters and progress filters (all, not started, in progress, completed)
+- Sorting (recommended first, shortest first, A to Z)
+- Course card status treatment for enrolled/completed states
+
+### Course Detail Experience
+
+- Embedded learning video
+- Myth-vs-fact cards with visual differentiation
+- Interactive single-question quiz with explicit feedback
+- Enroll and mark-as-completed controls
+- Completion confirmation banner
+- Assignment cards with one-tap submission state updates
+- Activities and trusted external resource links
 
 ### Student Assignments
 
-- Assignments page with pending and submitted filters
-- One-tap submission tracking per assignment
-- Assignment-aware dashboard quick actions
+- Assignment status dashboard (pending/submitted/all)
+- Assignment completion metric and status chips
+- One-click submission tracking per assignment
+- Student-only access guard with fallback guidance for non-student roles
 
 ### Resource Hub
 
-- Crisis support strip with direct links to 988 Lifeline and Crisis Text Line
-- Featured classroom discussion video
-- Stigma challenge game: identify stigma vs supportive facts across four statements with score tracking
-- Trusted external resources: NAMI, Mental Health America, Crisis Text Line, 988 Lifeline
+- Crisis support strip with 988 Lifeline and Crisis Text Line
+- Featured classroom video
+- Four-step stigma challenge game with score and explanations
+- Trusted external resources (NAMI, MHA, 988, Crisis Text Line)
 
-### Support Page
+### Support Workflows
 
-- Platform features overview for school stakeholders
-- Support ticket form: submit onboarding, licensing, or technical requests
-- Ticket ID generation and confirmation with local persistence
-- Accessible from the main navigation when logged in
+- Available on both the public landing page and authenticated support page
+- Issue types:
+  - Platform demo request
+  - Pricing and licensing
+  - Technical onboarding
+  - School pilot setup
+  - Other support need
+- Ticket IDs are generated client-side and stored locally
+- Ticket details require a minimum detail length for better triage quality
 
-### Teacher and Admin Analytics Dashboard
+### Teacher/Admin Analytics Dashboard
 
 - Access restricted to teacher and admin roles
-- Filter by school and grade
-- Six color-coded cohort metrics: total students, enrolled, students with completions, average completed modules, stigma module completions, low-engagement count
-- Top topic engagement with custom progress bars and percentages
-- Most completed courses with student counts
-- Top learners table sorted by completions and completion rate
-- Recommended instructional actions for educators
+- Filters by school and grade
+- Cohort metrics:
+  - Total students
+  - Enrolled students
+  - Students with completion
+  - Average completed modules
+  - Stigma module completions
+  - Low-engagement students
+- Topic engagement and top completed course insights
+- Top learner table sorted by completion outcomes
 
 ### Profile
 
-- Edit name, school, grade, and learning interest areas
+- Edit name, school, grade, and interests
 - View learning history and completed module list
+
+## Routes
+
+Public routes:
+
+- / - Landing page (redirects authenticated users to /dashboard)
+- /login
+- /signup
+
+Protected routes:
+
+- /dashboard
+- /courses
+- /courses/:courseId
+- /assignments
+- /resources
+- /support
+- /profile
+- /teacher-dashboard
+
+## Local Data Model
+
+Local storage keys:
+
+- mindsaathi_users_v1
+- mindsaathi_session_v1
+- mindsaathi_demo_seeded_v1
+- mindsaathi_support_tickets_v1
+
+Each user profile stores id, name, email, password, role, school, grade, interests, enrolled course IDs, completed course IDs, submitted assignment IDs, and createdAt.
+
+Note: passwords are stored in plain text for MVP/demo purposes only.
 
 ## Tech Stack
 
@@ -81,72 +140,40 @@ In many school contexts, students avoid mental health conversations because of s
 - TypeScript 5
 - Vite 8
 - React Router DOM 7
-- Local storage for MVP persistence (no backend required)
-- Custom CSS design system (no UI library)
+- Local storage persistence (no backend in MVP)
+- Custom CSS (no external UI component library)
 
 ## Project Structure
 
-```
+```text
 src/
   components/
-    AppShell.tsx          Navigation shell with role-aware nav and user progress bar
-    ProtectedRoute.tsx    Auth guard for protected routes
+    AppShell.tsx             Role-aware navigation shell and user progress chip
+    ProtectedRoute.tsx       Auth guard for protected routes
   context/
-    AuthContext.tsx       Auth state, user management, enrollment and completion logic
+    AuthContext.tsx          Auth state and user/course/assignment actions
   data/
-    courses.ts            Six course definitions with myths, games, assignments, resources
-    demoUsers.ts          Pre-seeded demo accounts for presenting the platform
+    courses.ts               Course definitions with myths, games, assignments, resources
+    demoUsers.ts             Seed demo accounts
   lib/
-    storage.ts            Local storage helpers with demo user seeding on first load
+    storage.ts               Local storage helpers and demo seeding
   pages/
-    LandingPage.tsx       Public marketing page, redirects authenticated users to dashboard
-    LoginPage.tsx         Login form
-    SignupPage.tsx        Signup form with interest selection and role choice
-    DashboardPage.tsx     Personalized student dashboard
-    CoursesPage.tsx       Filterable course library
-    CourseDetailPage.tsx  Full module page: video, myths, game, assignments, completion
-    AssignmentsPage.tsx   Student assignment tracker
-    ResourcesPage.tsx     Crisis resources, classroom video, stigma challenge game
-    SupportPage.tsx       Platform features overview and support ticket form
-    ProfilePage.tsx       Profile editing and learning history
-    TeacherDashboardPage.tsx  Cohort analytics for teachers and admins
+    LandingPage.tsx          Public product page plus support ticket form
+    LoginPage.tsx            Login form
+    SignupPage.tsx           Role-based signup with interests
+    DashboardPage.tsx        Personalized student dashboard
+    CoursesPage.tsx          Filterable and sortable course library
+    CourseDetailPage.tsx     Full module experience and assignment actions
+    AssignmentsPage.tsx      Student assignment tracker
+    ResourcesPage.tsx        Resource hub and stigma challenge game
+    SupportPage.tsx          Authenticated support overview and ticket form
+    ProfilePage.tsx          Profile editing and learning history
+    TeacherDashboardPage.tsx Teacher/admin cohort analytics
   App.tsx
   index.css
   main.tsx
   types.ts
 ```
-
-## Routes
-
-Public:
-
-- `/` - Landing page (redirects to `/dashboard` if already logged in)
-- `/login`
-- `/signup`
-
-Protected (requires login):
-
-- `/dashboard` - Student personalized dashboard
-- `/courses` - Course library with filters
-- `/courses/:courseId` - Full module detail page
-- `/assignments` - Student assignments tracker
-- `/resources` - Mental health resources and stigma challenge game
-- `/support` - Platform features and support ticket form
-- `/profile` - Profile editing
-- `/teacher-dashboard` - Teacher and admin cohort analytics
-
-## Local Data Model
-
-Local storage keys:
-
-- `mindsaathi_users_v1` - All user profiles
-- `mindsaathi_session_v1` - Active session email
-- `mindsaathi_demo_seeded_v1` - Flag to prevent re-seeding demo users
-- `mindsaathi_support_tickets_v1` - Submitted support tickets
-
-Each user profile stores: id, name, email, role, school, grade, interests, enrolled course IDs, completed course IDs, submitted assignment IDs, and account creation date.
-
-Passwords are stored in plain text. This is an MVP demo data layer with no production security model.
 
 ## Getting Started
 
@@ -156,13 +183,13 @@ Install dependencies:
 npm install
 ```
 
-Start development server:
+Run development server:
 
 ```bash
 npm run dev
 ```
 
-Build for production:
+Build production bundle:
 
 ```bash
 npm run build
@@ -174,21 +201,20 @@ Preview production build:
 npm run preview
 ```
 
-## Demo Flow
+## Suggested Demo Flow
 
-1. Open the app and create a student account. Select at least one interest area during signup.
-2. On the dashboard, review your personalized module recommendations and progress stats.
-3. Open a course module and go through the embedded video, myth vs fact section, and interactive quiz.
-4. Mark the module as completed and observe the completion banner and dashboard progress update.
-5. Navigate to the assignments page and submit a pending assignment.
-6. Log out and create a teacher or admin account at the same school.
-7. Open the teacher dashboard and filter by school and grade to see cohort analytics.
-8. Show the top learners table and topic engagement bars.
-9. Navigate to the Support page to show the platform features overview and support ticket form.
+1. Open the landing page and submit a sample support ticket.
+2. Create a student account and select interest areas.
+3. Review dashboard recommendations and quick actions.
+4. Open a course, complete quiz and module actions.
+5. Submit a pending assignment from module or assignments page.
+6. Create a teacher/admin account in the same school.
+7. Open teacher dashboard and filter by school/grade.
+8. Review topic engagement and top learner analytics.
 
 ## Safety Note
 
-This product is educational and is not a substitute for professional mental health diagnosis or treatment. In a real deployment, crisis support pathways must be region-specific and validated with local health authorities.
+MindSaathi Schools is educational and not a substitute for professional diagnosis or treatment. Real deployments should use region-specific crisis pathways and validated institutional response policies.
 
 ## Current Limitations
 
@@ -196,13 +222,13 @@ This product is educational and is not a substitute for professional mental heal
 - No password hashing or enterprise authentication
 - No server-side role enforcement
 - No LMS or SIS integration
-- Support tickets are stored locally and not transmitted
+- Support tickets are stored locally and are not transmitted
 
 ## Roadmap
 
-- Backend authentication and database
+- Backend auth and persistent database
 - Teacher-side assignment review and rubric scoring
-- Attendance-risk alerts and intervention workflows
-- CSV and PDF report export for teachers
-- Regionalized crisis support configuration
+- Attendance-risk signals and intervention workflows
+- CSV and PDF exports for analytics
+- Region-specific crisis support configuration
 - SSO and LMS integration

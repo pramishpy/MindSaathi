@@ -113,11 +113,11 @@ export default function DashboardPage() {
             </Link>
           </article>
 
-          <article className="quick-action-card accent-coral">
+          <article className="quick-action-card accent-teal">
             <p className="quick-action-icon">PLAY</p>
             <h3>Play stigma challenge</h3>
             <p>Train your responses using short, classroom-safe mini games.</p>
-            <Link className="btn secondary" to="/resources">
+            <Link className="btn primary" to="/resources">
               Open challenge
             </Link>
           </article>
