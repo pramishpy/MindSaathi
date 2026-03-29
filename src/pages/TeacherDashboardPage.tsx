@@ -268,27 +268,27 @@ export default function TeacherDashboardPage() {
 
       <section className="panel">
         <div className="stats-grid teacher-stats-grid">
-          <article className="stat-item">
+          <article className="stat-item stat-teal">
             <span>Total students</span>
             <strong>{metrics.totalStudents}</strong>
           </article>
-          <article className="stat-item">
+          <article className="stat-item stat-blue">
             <span>Enrolled students</span>
             <strong>{metrics.enrolledStudents}</strong>
           </article>
-          <article className="stat-item">
+          <article className="stat-item stat-green">
             <span>Students with completion</span>
             <strong>{metrics.studentsWithCompletion}</strong>
           </article>
-          <article className="stat-item">
+          <article className="stat-item stat-purple">
             <span>Avg completed modules</span>
             <strong>{metrics.avgCompletedCourses.toFixed(1)}</strong>
           </article>
-          <article className="stat-item">
+          <article className="stat-item stat-green">
             <span>Stigma module completions</span>
             <strong>{metrics.stigmaCourseCompletions}</strong>
           </article>
-          <article className="stat-item">
+          <article className="stat-item stat-amber">
             <span>Low engagement students</span>
             <strong>{metrics.lowEngagementCount}</strong>
           </article>
@@ -302,23 +302,30 @@ export default function TeacherDashboardPage() {
             {topicPerformance.length === 0 ? (
               <p>No completed-course topic data yet.</p>
             ) : (
-              topicPerformance.map((topic) => (
-                <div className="analytics-item" key={topic.label}>
-                  <div>
-                    <strong>{topic.label}</strong>
-                    <p>{topic.count} completions</p>
+              topicPerformance.map((topic) => {
+                const pct =
+                  metrics.totalStudents > 0
+                    ? Math.min(Math.round((topic.count / metrics.totalStudents) * 100), 100)
+                    : 0
+                return (
+                  <div className="analytics-item" key={topic.label}>
+                    <div className="analytics-item-row">
+                      <strong>{topic.label}</strong>
+                      <span className="analytics-pct">{pct}%</span>
+                    </div>
+                    <p style={{ fontSize: '0.82rem' }}>{topic.count} completions</p>
+                    <div
+                      className="bar-track"
+                      role="progressbar"
+                      aria-valuenow={pct}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                    >
+                      <div className="bar-fill" style={{ width: `${pct}%` }} />
+                    </div>
                   </div>
-                  <progress
-                    className="topic-progress"
-                    max={100}
-                    value={
-                      metrics.totalStudents > 0
-                        ? Math.min((topic.count / metrics.totalStudents) * 100, 100)
-                        : 0
-                    }
-                  />
-                </div>
-              ))
+                )
+              })
             )}
           </div>
         </article>

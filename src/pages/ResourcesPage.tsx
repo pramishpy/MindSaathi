@@ -16,20 +16,17 @@ const challengeItems: StigmaChallengeItem[] = [
   {
     statement: 'Asking for counseling support is a healthy and brave step.',
     isStigma: false,
-    explanation:
-      'Correct. Help-seeking should be normalized and encouraged in schools.',
+    explanation: 'Correct. Help-seeking should be normalized and encouraged in schools.',
   },
   {
     statement: 'Mental illness can happen to anyone and recovery is possible.',
     isStigma: false,
-    explanation:
-      'Correct. Recovery and symptom management are possible with support.',
+    explanation: 'Correct. Recovery and symptom management are possible with support.',
   },
   {
     statement: 'People with schizophrenia are always violent.',
     isStigma: true,
-    explanation:
-      'This is a harmful myth. Most people with schizophrenia are not violent.',
+    explanation: 'This is a harmful myth. Most people with schizophrenia are not violent.',
   },
 ]
 
@@ -66,33 +63,22 @@ export default function ResourcesPage() {
   const finished = step >= challengeItems.length
 
   const scoreLabel = useMemo(() => {
-    if (score === challengeItems.length) {
-      return 'Excellent: you are a stigma-breaker leader.'
-    }
-    if (score >= Math.ceil(challengeItems.length * 0.7)) {
-      return 'Great work: your responses are strongly anti-stigma.'
-    }
-    return 'Good start: review explanations and try again to improve.'
+    if (score === challengeItems.length) return 'Excellent — you are a stigma-breaker leader.'
+    if (score >= Math.ceil(challengeItems.length * 0.7))
+      return 'Great work — your responses are strongly anti-stigma.'
+    return 'Good start — review the explanations and try again.'
   }, [score])
 
   function handleAnswer(chooseStigma: boolean) {
-    if (!activeItem || awaitingNext) {
-      return
-    }
-
+    if (!activeItem || awaitingNext) return
     const correct = chooseStigma === activeItem.isStigma
-    if (correct) {
-      setScore((current) => current + 1)
-    }
-
-    setFeedback(
-      `${correct ? 'Correct. ' : 'Not quite. '} ${activeItem.explanation}`,
-    )
+    if (correct) setScore((c) => c + 1)
+    setFeedback(`${correct ? 'Correct. ' : 'Not quite. '}${activeItem.explanation}`)
     setAwaitingNext(true)
   }
 
   function handleNext() {
-    setStep((current) => current + 1)
+    setStep((c) => c + 1)
     setFeedback('')
     setAwaitingNext(false)
   }
@@ -111,8 +97,8 @@ export default function ResourcesPage() {
           <p className="eyebrow">Resource hub for schools</p>
           <h1>Videos, games, and support tools</h1>
           <p>
-            Use these practical resources to teach facts about mental health
-            conditions and help students challenge false stigma narratives.
+            Use these practical resources to teach facts about mental health conditions and help
+            students challenge false stigma narratives.
           </p>
         </div>
         <div className="metric-hero">
@@ -127,8 +113,8 @@ export default function ResourcesPage() {
       <section className="panel support-strip" id="support-tools">
         <h2>Need support right now?</h2>
         <p>
-          Reach a trusted adult, school counselor, or helpline quickly. Asking for
-          support is always a strong step.
+          Reach a trusted adult, school counselor, or helpline quickly. Asking for support is
+          always a strong step.
         </p>
         <div className="button-row">
           <a
@@ -149,8 +135,8 @@ export default function ResourcesPage() {
           </a>
         </div>
         <p className="muted-text">
-          If there is immediate danger, contact local emergency services and a
-          nearby trusted adult now.
+          If there is immediate danger, contact local emergency services and a nearby trusted adult
+          now.
         </p>
       </section>
 
@@ -205,7 +191,7 @@ export default function ResourcesPage() {
                   This is a supportive fact
                 </button>
               </div>
-              {feedback ? <p className="success-text">{feedback}</p> : null}
+              {feedback ? <p className="muted-text">{feedback}</p> : null}
               {awaitingNext ? (
                 <button className="btn primary" type="button" onClick={handleNext}>
                   Next statement

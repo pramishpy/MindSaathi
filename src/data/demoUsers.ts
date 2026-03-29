@@ -1,0 +1,126 @@
+import type { UserProfile } from '../types'
+
+// Pre-seeded demo accounts for hackathon demos.
+// Passwords are plaintext (MVP only — no real auth backend).
+// School: "Greenwood High School" so teacher sees real student data immediately.
+
+export const DEMO_STUDENT_EMAIL = 'student@demo.mindsaathi.com'
+export const DEMO_TEACHER_EMAIL = 'teacher@demo.mindsaathi.com'
+export const DEMO_PASSWORD = 'demo123'
+
+export const demoUsers: UserProfile[] = [
+  {
+    id: 'demo-student-001',
+    name: 'Priya Sharma',
+    email: DEMO_STUDENT_EMAIL,
+    password: DEMO_PASSWORD,
+    role: 'student',
+    school: 'Greenwood High School',
+    grade: 'Grade 10',
+    interests: ['anxiety', 'stigma', 'wellbeing'],
+    enrolledCourseIds: [
+      'stigma-myth-buster',
+      'support-a-friend',
+      'anxiety-101',
+      'depression-awareness',
+    ],
+    completedCourseIds: ['stigma-myth-buster', 'support-a-friend', 'anxiety-101'],
+    submittedAssignmentIds: [
+      'stigma-myth-buster::stigma-poster-brief',
+      'support-a-friend::support-a-friend-safety-plan',
+    ],
+    createdAt: '2025-11-01T08:00:00.000Z',
+  },
+  {
+    id: 'demo-teacher-001',
+    name: 'Ms. Kavitha Rao',
+    email: DEMO_TEACHER_EMAIL,
+    password: DEMO_PASSWORD,
+    role: 'teacher',
+    school: 'Greenwood High School',
+    grade: 'Grade 10',
+    interests: ['stigma', 'wellbeing'],
+    enrolledCourseIds: [],
+    completedCourseIds: [],
+    submittedAssignmentIds: [],
+    createdAt: '2025-10-15T08:00:00.000Z',
+  },
+  // Extra students so teacher analytics show real data
+  {
+    id: 'demo-student-002',
+    name: 'Arjun Mehta',
+    email: 'arjun@demo.mindsaathi.com',
+    password: DEMO_PASSWORD,
+    role: 'student',
+    school: 'Greenwood High School',
+    grade: 'Grade 10',
+    interests: ['depression', 'stigma'],
+    enrolledCourseIds: ['stigma-myth-buster', 'support-a-friend', 'depression-awareness'],
+    completedCourseIds: ['stigma-myth-buster', 'support-a-friend'],
+    submittedAssignmentIds: ['stigma-myth-buster::stigma-poster-brief'],
+    createdAt: '2025-11-02T08:00:00.000Z',
+  },
+  {
+    id: 'demo-student-003',
+    name: 'Sneha Patel',
+    email: 'sneha@demo.mindsaathi.com',
+    password: DEMO_PASSWORD,
+    role: 'student',
+    school: 'Greenwood High School',
+    grade: 'Grade 11',
+    interests: ['anxiety', 'bipolar'],
+    enrolledCourseIds: ['stigma-myth-buster', 'anxiety-101', 'bipolar-basics'],
+    completedCourseIds: ['stigma-myth-buster', 'anxiety-101'],
+    submittedAssignmentIds: ['anxiety-101::anxiety-breathing-plan'],
+    createdAt: '2025-11-03T08:00:00.000Z',
+  },
+  {
+    id: 'demo-student-004',
+    name: 'Rohan Das',
+    email: 'rohan@demo.mindsaathi.com',
+    password: DEMO_PASSWORD,
+    role: 'student',
+    school: 'Greenwood High School',
+    grade: 'Grade 11',
+    interests: ['stigma', 'schizophrenia'],
+    enrolledCourseIds: [
+      'stigma-myth-buster',
+      'support-a-friend',
+      'schizophrenia-awareness',
+    ],
+    completedCourseIds: ['stigma-myth-buster', 'support-a-friend', 'schizophrenia-awareness'],
+    submittedAssignmentIds: [
+      'stigma-myth-buster::stigma-poster-brief',
+      'schizophrenia-awareness::schizophrenia-myth-correction',
+    ],
+    createdAt: '2025-11-04T08:00:00.000Z',
+  },
+  {
+    id: 'demo-student-005',
+    name: 'Aisha Khan',
+    email: 'aisha@demo.mindsaathi.com',
+    password: DEMO_PASSWORD,
+    role: 'student',
+    school: 'Greenwood High School',
+    grade: 'Grade 9',
+    interests: ['wellbeing', 'stigma'],
+    enrolledCourseIds: ['stigma-myth-buster'],
+    completedCourseIds: [],
+    submittedAssignmentIds: [],
+    createdAt: '2025-11-10T08:00:00.000Z',
+  },
+  {
+    id: 'demo-student-006',
+    name: 'Vikram Nair',
+    email: 'vikram@demo.mindsaathi.com',
+    password: DEMO_PASSWORD,
+    role: 'student',
+    school: 'Greenwood High School',
+    grade: 'Grade 9',
+    interests: ['depression', 'anxiety'],
+    enrolledCourseIds: ['stigma-myth-buster', 'depression-awareness', 'anxiety-101'],
+    completedCourseIds: ['stigma-myth-buster'],
+    submittedAssignmentIds: [],
+    createdAt: '2025-11-11T08:00:00.000Z',
+  },
+]

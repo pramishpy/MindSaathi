@@ -8,6 +8,7 @@ const studentNavItems = [
   { to: '/courses', label: 'Courses' },
   { to: '/assignments', label: 'Assignments' },
   { to: '/resources', label: 'Resources' },
+  { to: '/support', label: 'Support' },
   { to: '/profile', label: 'Profile' },
 ]
 
@@ -15,6 +16,7 @@ const staffNavItems = [
   { to: '/dashboard', label: 'Dashboard' },
   { to: '/courses', label: 'Courses' },
   { to: '/resources', label: 'Resources' },
+  { to: '/support', label: 'Support' },
   { to: '/profile', label: 'Profile' },
 ]
 
@@ -36,25 +38,34 @@ export default function AppShell() {
       ? [...staffNavItems, { to: '/teacher-dashboard', label: 'Teacher Dashboard' }]
       : studentNavItems
 
-  const mobileQuickLinks = useMemo(
-    () => [
+  const mobileQuickLinks = useMemo(() => {
+    if (user.role === 'teacher' || user.role === 'admin') {
+      return [
+        { to: '/dashboard', label: 'Home' },
+        { to: '/courses', label: 'Courses' },
+        { to: '/support', label: 'Support' },
+        { to: '/teacher-dashboard', label: 'Analytics' },
+      ]
+    }
+    return [
       { to: '/dashboard', label: 'Home' },
       { to: '/courses', label: 'Learn' },
       { to: '/assignments', label: 'Tasks' },
-      { to: '/resources', label: 'Support' },
-    ],
-    [],
-  )
+      { to: '/support', label: 'Support' },
+    ]
+  }, [user.role])
 
   return (
     <div className="app-shell">
       <header className="top-nav">
         <div className="brand-block">
-          <img
-            className="brand-logo"
-            src="/mindsaathi-schools-logo.svg"
-            alt="MindSaathi Schools"
-          />
+          <NavLink to="/dashboard">
+            <img
+              className="brand-logo"
+              src="/mindsaathi-schools-logo.svg"
+              alt="MindSaathi Schools"
+            />
+          </NavLink>
         </div>
 
         <nav className="nav-links" aria-label="Main">
@@ -72,9 +83,18 @@ export default function AppShell() {
         </nav>
 
         <div className="user-chip-row">
+          <div className="user-avatar" aria-hidden="true">
+            {user.name.charAt(0).toUpperCase()}
+          </div>
           <div className="user-chip">
             <p>{user.name}</p>
-            <span>{progressRate}% course progress</span>
+            <div className="user-progress-bar-wrap">
+              <div
+                className="user-progress-bar-fill"
+                style={{ width: `${progressRate}%` }}
+              />
+            </div>
+            <span>{progressRate}% complete</span>
           </div>
           <button
             className="btn ghost"

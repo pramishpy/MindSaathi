@@ -16,6 +16,7 @@ export default function CourseDetailPage() {
   const [selectedAnswer, setSelectedAnswer] = useState('')
   const [feedback, setFeedback] = useState('')
   const [isCorrect, setIsCorrect] = useState(false)
+  const [justCompleted, setJustCompleted] = useState(false)
 
   if (!course) {
     return (
@@ -59,6 +60,12 @@ export default function CourseDetailPage() {
     setIsCorrect(option.correct)
   }
 
+  function handleComplete() {
+    completeCourse(activeCourse.id)
+    setJustCompleted(true)
+    setTimeout(() => setJustCompleted(false), 3500)
+  }
+
   return (
     <div className="page-stack">
       <section className="panel gradient-panel">
@@ -91,54 +98,87 @@ export default function CourseDetailPage() {
         </div>
       </section>
 
-      <section className="panel split two">
-        <article>
-          <h2>Myths vs facts</h2>
-          <div className="myth-grid">
-            {activeCourse.myths.map((item, idx) => (
-              <div className="myth-item" key={`${activeCourse.id}-${idx}`}>
-                <h3>Myth</h3>
+      {/* Myth vs Fact — visually differentiated */}
+      <section className="panel">
+        <h2>Myths vs facts</h2>
+        <p className="muted-text" style={{ marginBottom: '0.75rem' }}>
+          Common misconceptions and what the evidence actually says.
+        </p>
+        <div className="myth-fact-grid">
+          {activeCourse.myths.map((item, idx) => (
+            <div className="myth-fact-pair" key={`${activeCourse.id}-${idx}`}>
+              <div className="myth-card">
+                <span className="myth-label">MYTH</span>
                 <p>{item.myth}</p>
-                <h3>Fact</h3>
+              </div>
+              <div className="fact-card">
+                <span className="fact-label">FACT</span>
                 <p>{item.fact}</p>
               </div>
-            ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Interactive game — standalone */}
+      <section className="panel">
+        <h2>Interactive game</h2>
+        <p className="muted-text">{activeCourse.game.title}</p>
+        <p style={{ marginTop: '0.5rem', fontWeight: 600, color: 'var(--ink)' }}>
+          {activeCourse.game.question}
+        </p>
+
+        <div className="quiz-options">
+          {activeCourse.game.options.map((option) => (
+            <label key={option.id} className="check-chip block">
+              <input
+                type="radio"
+                name="quiz-option"
+                value={option.id}
+                checked={selectedAnswer === option.id}
+                onChange={(event) => setSelectedAnswer(event.target.value)}
+              />
+              <span>{option.label}</span>
+            </label>
+          ))}
+        </div>
+
+        <div className="button-row">
+          <button className="btn primary" type="button" onClick={checkAnswer}>
+            Check answer
+          </button>
+          <button
+            className="btn ghost"
+            type="button"
+            onClick={() => {
+              setSelectedAnswer('')
+              setFeedback('')
+            }}
+          >
+            Reset
+          </button>
+        </div>
+
+        {feedback ? (
+          <p className={isCorrect ? 'success-text' : 'error-text'} style={{ marginTop: '0.5rem' }}>
+            {isCorrect ? '✓ ' : '✗ '}{feedback}
+          </p>
+        ) : null}
+      </section>
+
+      {/* Module completion — own dedicated section */}
+      <section className="panel module-completion-panel">
+        <div className="module-completion-content">
+          <div>
+            <h2>Module progress</h2>
+            <p>
+              {completed
+                ? 'You have completed this module. Well done!'
+                : enrolled
+                ? 'You are enrolled. Mark as completed once you finish the video and game.'
+                : 'Enroll to track your progress and unlock assignments.'}
+            </p>
           </div>
-        </article>
-
-        <article>
-          <h2>Interactive game</h2>
-          <p className="muted-text">{activeCourse.game.title}</p>
-          <p>{activeCourse.game.question}</p>
-
-          <div className="quiz-options">
-            {activeCourse.game.options.map((option) => (
-              <label key={option.id} className="check-chip block">
-                <input
-                  type="radio"
-                  name="quiz-option"
-                  value={option.id}
-                  checked={selectedAnswer === option.id}
-                  onChange={(event) => setSelectedAnswer(event.target.value)}
-                />
-                <span>{option.label}</span>
-              </label>
-            ))}
-          </div>
-
-          <div className="button-row">
-            <button className="btn primary" type="button" onClick={checkAnswer}>
-              Check answer
-            </button>
-            <button className="btn ghost" type="button" onClick={() => setSelectedAnswer('')}>
-              Reset
-            </button>
-          </div>
-
-          {feedback ? (
-            <p className={isCorrect ? 'success-text' : 'error-text'}>{feedback}</p>
-          ) : null}
-
           <div className="button-row">
             {!enrolled ? (
               <button
@@ -150,19 +190,29 @@ export default function CourseDetailPage() {
               </button>
             ) : null}
 
-            {!completed ? (
+            {enrolled && !completed ? (
               <button
                 className="btn primary"
                 type="button"
-                onClick={() => completeCourse(activeCourse.id)}
+                onClick={handleComplete}
               >
                 Mark as completed
               </button>
-            ) : (
-              <span className="chip done">Completed</span>
-            )}
+            ) : null}
+
+            {completed ? (
+              <span className="chip done" style={{ fontSize: '0.95rem', padding: '0.4rem 0.9rem' }}>
+                ✓ Completed
+              </span>
+            ) : null}
           </div>
-        </article>
+        </div>
+
+        {justCompleted ? (
+          <div className="completion-banner" role="status">
+            🎉 Module completed! Your progress has been saved.
+          </div>
+        ) : null}
       </section>
 
       <section className="panel">

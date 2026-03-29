@@ -34,7 +34,7 @@ export default function LoginPage() {
     <div className="auth-screen">
       <section className="auth-card hero-card">
         <p className="eyebrow">School-first mental wellness platform</p>
-        <h1>MindSaathi MVP</h1>
+        <h1>MindSaathi Schools</h1>
         <p>
           A culturally sensitive learning platform to reduce stigma, improve early
           support, and help students understand mental health conditions with facts.
@@ -44,6 +44,7 @@ export default function LoginPage() {
           <li>Course modules with videos, games, and myth-busting drills</li>
           <li>Action-ready resources for safe help-seeking in school communities</li>
         </ul>
+
       </section>
 
       <section className="auth-card form-card">

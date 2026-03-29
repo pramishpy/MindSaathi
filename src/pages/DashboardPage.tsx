@@ -87,7 +87,9 @@ export default function DashboardPage() {
         <div className="metric-hero">
           <p>Course completion</p>
           <h2>{completionRate}%</h2>
-          <progress max={100} value={completionRate} />
+          <div className="bar-track" role="progressbar" aria-valuenow={completionRate} aria-valuemin={0} aria-valuemax={100}>
+            <div className="bar-fill" style={{ width: `${completionRate}%` }} />
+          </div>
           <span>{milestoneText}</span>
         </div>
       </section>
@@ -95,10 +97,11 @@ export default function DashboardPage() {
       <section className="panel">
         <div className="section-head">
           <h2>Quick start in 5 minutes</h2>
-          <p className="muted-text">Three easy actions for today.</p>
+          <p className="muted-text">Four actions to move forward today.</p>
         </div>
         <div className="quick-action-grid">
-          <article className="quick-action-card">
+          <article className="quick-action-card accent-teal">
+            <p className="quick-action-icon">📚</p>
             <h3>{nextCourse ? 'Continue learning' : 'Pick your first module'}</h3>
             <p>
               {nextCourse
@@ -110,7 +113,8 @@ export default function DashboardPage() {
             </Link>
           </article>
 
-          <article className="quick-action-card">
+          <article className="quick-action-card accent-coral">
+            <p className="quick-action-icon">🎯</p>
             <h3>Play stigma challenge</h3>
             <p>Train your responses using short, classroom-safe mini games.</p>
             <Link className="btn secondary" to="/resources">
@@ -118,7 +122,8 @@ export default function DashboardPage() {
             </Link>
           </article>
 
-          <article className="quick-action-card">
+          <article className="quick-action-card accent-green">
+            <p className="quick-action-icon">✅</p>
             <h3>{nextAssignment ? 'Complete your next assignment' : 'All assignments submitted'}</h3>
             <p>
               {nextAssignment
@@ -130,7 +135,8 @@ export default function DashboardPage() {
             </Link>
           </article>
 
-          <article className="quick-action-card">
+          <article className="quick-action-card accent-slate">
+            <p className="quick-action-icon">👤</p>
             <h3>Tune your interests</h3>
             <p>Update your profile so recommendations match what you need now.</p>
             <Link className="btn ghost" to="/profile">
@@ -142,23 +148,23 @@ export default function DashboardPage() {
 
       <section className="panel">
         <div className="stats-grid">
-          <article className="stat-item">
-            <span>Enrolled courses</span>
+          <article className="stat-item stat-teal">
+            <span>Enrolled modules</span>
             <strong>{enrolledCourses.length}</strong>
           </article>
-          <article className="stat-item">
-            <span>Completed courses</span>
+          <article className="stat-item stat-green">
+            <span>Completed</span>
             <strong>{completedCourses.length}</strong>
           </article>
-          <article className="stat-item">
+          <article className="stat-item stat-blue">
             <span>In progress</span>
             <strong>{inProgressCourses.length}</strong>
           </article>
-          <article className="stat-item">
+          <article className="stat-item stat-purple">
             <span>Interest tracks</span>
             <strong>{user.interests.length}</strong>
           </article>
-          <article className="stat-item">
+          <article className="stat-item stat-amber">
             <span>Assignments pending</span>
             <strong>{pendingAssignments.length}</strong>
           </article>
@@ -212,7 +218,7 @@ export default function DashboardPage() {
 
       <section className="panel">
         <div className="section-head">
-          <h2>Courses completed till now</h2>
+          <h2>Completed modules</h2>
           <Link className="btn ghost" to="/courses">
             Browse all courses
           </Link>

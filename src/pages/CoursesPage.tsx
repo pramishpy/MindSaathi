@@ -214,33 +214,34 @@ export default function CoursesPage() {
               const isCompleted = completedSet.has(course.id)
               const isEnrolled = enrolledSet.has(course.id)
 
+              const statusClass = isCompleted
+                ? 'course-card--completed'
+                : isEnrolled
+                  ? 'course-card--progress'
+                  : ''
+
               return (
-                <article key={course.id} className="course-card">
+                <article key={course.id} className={`course-card ${statusClass}`}>
+                  {isCompleted ? (
+                    <div className="course-card-status-bar status-completed">
+                      ✓ Completed
+                    </div>
+                  ) : isEnrolled ? (
+                    <div className="course-card-status-bar status-inprogress">
+                      ↗ In progress
+                    </div>
+                  ) : null}
                   <div className="course-chip-row">
                     <span className="chip">{TOPIC_LABELS[course.topic]}</span>
                     <span className="chip subtle">{course.level}</span>
                     <span className="chip subtle">{course.duration}</span>
-                    <span className="chip subtle">
-                      {course.assignments.length} assignment
-                      {course.assignments.length === 1 ? '' : 's'}
-                    </span>
                   </div>
                   <h3>{course.title}</h3>
                   <p>{course.summary}</p>
-                  <div className="status-row">
-                    {isCompleted ? <span className="chip done">Completed</span> : null}
-                    {!isCompleted && isEnrolled ? (
-                      <span className="chip progress">In progress</span>
-                    ) : null}
-                  </div>
-                  <p className="status-hint">
-                    {isCompleted
-                      ? 'You have completed this module.'
-                      : isEnrolled
-                        ? 'Pick up where you stopped.'
-                        : 'New module for you.'}
-                  </p>
-                  <Link className="btn primary" to={`/courses/${course.id}`}>
+                  <Link
+                    className={`btn ${isCompleted ? 'ghost' : 'primary'}`}
+                    to={`/courses/${course.id}`}
+                  >
                     {isCompleted
                       ? 'Review module'
                       : isEnrolled
