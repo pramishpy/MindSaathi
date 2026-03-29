@@ -13,7 +13,7 @@ const studentNavItems = [
 ]
 
 const staffNavItems = [
-  { to: '/dashboard', label: 'Dashboard' },
+  { to: '/dashboard', label: 'Buyer Dashboard' },
   { to: '/courses', label: 'Courses' },
   { to: '/resources', label: 'Resources' },
   { to: '/support', label: 'Support' },

@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 interface SupportTicket {
   id: string
@@ -25,12 +26,34 @@ interface TicketFormState {
 const TICKETS_KEY = 'mindsaathi_support_tickets_v1'
 
 const issueTypes = [
+  'Request pricing info',
   'Platform demo request',
-  'Pricing and licensing',
   'Technical onboarding',
   'School pilot setup',
   'Other support need',
 ]
+
+function resolveIssueType(value: string | null): string {
+  if (!value) {
+    return issueTypes[0]
+  }
+
+  const normalized = value.trim().toLowerCase()
+
+  if (normalized === 'pricing') {
+    return 'Request pricing info'
+  }
+
+  if (normalized === 'demo') {
+    return 'Platform demo request'
+  }
+
+  const matchedType = issueTypes.find(
+    (type) => type.toLowerCase() === normalized,
+  )
+
+  return matchedType ?? issueTypes[0]
+}
 
 const featureItems = [
   {
@@ -98,7 +121,11 @@ function saveTicket(ticket: SupportTicket): number {
 }
 
 export default function SupportPage() {
-  const [form, setForm] = useState<TicketFormState>(initialForm)
+  const [searchParams] = useSearchParams()
+  const [form, setForm] = useState<TicketFormState>(() => ({
+    ...initialForm,
+    issueType: resolveIssueType(searchParams.get('issueType')),
+  }))
   const [ticketCount, setTicketCount] = useState(() => getStoredTicketCount())
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -279,7 +306,7 @@ export default function SupportPage() {
             {success ? <p className="success-text">{success}</p> : null}
 
             <button className="btn primary" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Submitting…' : 'Submit support ticket'}
+              {isSubmitting ? 'Submitting...' : 'Submit support ticket'}
             </button>
           </form>
         </div>
